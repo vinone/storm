@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="STATEMACHINE.SKELETON.ICredential">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICredential.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.ICredentialProvider">
+    <Position X="12.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICredentialProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.ICustomStateMachineControllerContext">
+    <Position X="3.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ICustomStateMachineControllerContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ControledMachine" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.IStateMachine">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAACAAABBAAAAAAgAARAAAAAA=</HashCode>
+      <FileName>IStateMachine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentState" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="States" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.IStateMachineState">
+    <Position X="6.5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>IStateMachineState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.IStateTransition">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAQCQAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>IStateTransition.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Policy" />
+      <Property Name="Parent" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.IStateTransitionPending">
+    <Position X="0.5" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAg=</HashCode>
+      <FileName>IStateTransitionPending.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="StateMachine" />
+      <Property Name="TransitionPending" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.IStateTransitionPendingQueue">
+    <Position X="0.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAQAAAAMAAAQAAAAABAAAAA=</HashCode>
+      <FileName>IStateTransitionPendingQueue.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="MyPendencies" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="STATEMACHINE.SKELETON.IStateTransitionPolicy">
+    <Position X="9.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAIAAAAAAAAAAAAQAAAAAAgACCAAAUAAAAAA=</HashCode>
+      <FileName>IStateTransitionPolicy.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CredentialProvided" />
+    </ShowAsAssociation>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
