@@ -46,15 +46,15 @@ namespace STATEMACHINE.TESTS.Mocks
             var emNegociacao = new StateMachineState("Em Negociação");
             var aprovado = new StateMachineState("Aprovado");
             var desistencia = new StateMachineState("Desistência");
-            var analiseCredito = new StateMachineState("Análise Crédito");
+            var analise = new StateMachineState("Análise Crédito");
 
             var policy = new StateTransitionPolicy(new Cargo());
 
-            var transicaoEmNegociacaoParaAnaliseCredito = new StateTransition(emNegociacao, analiseCredito);
-            transicaoEmNegociacaoParaAnaliseCredito.Identifier = 1;
-            transicaoEmNegociacaoParaAnaliseCredito.Name = "De Em Negociação para Analise Credito";
-            transicaoEmNegociacaoParaAnaliseCredito.Policy = policy;
-            emNegociacao.Transitions.Add(transicaoEmNegociacaoParaAnaliseCredito);
+            var transicaoEmNegociacaoParaanalise = new StateTransition(emNegociacao, analise);
+            transicaoEmNegociacaoParaanalise.Identifier = 1;
+            transicaoEmNegociacaoParaanalise.Name = "De Em Negociação para Em Analise";
+            transicaoEmNegociacaoParaanalise.Policy = policy;
+            emNegociacao.Transitions.Add(transicaoEmNegociacaoParaanalise);
 
             var transicaoEmNegociacaoParaAprovado = new StateTransition(emNegociacao, aprovado);
             transicaoEmNegociacaoParaAprovado.Identifier = 2;
@@ -80,13 +80,13 @@ namespace STATEMACHINE.TESTS.Mocks
             transicaoAprovadoParaAprovado.Policy = policy;
             aprovado.Transitions.Add(transicaoAprovadoParaAprovado);
 
-            var transicaoAnaliseCreditoParaAnaliseCredito = new StateTransition(analiseCredito, analiseCredito);
-            transicaoAnaliseCreditoParaAnaliseCredito.Identifier = 6;
-            transicaoAnaliseCreditoParaAnaliseCredito.Name = "De Analise Credito para Analise Credito";
-            transicaoAnaliseCreditoParaAnaliseCredito.Policy = policy;
-            analiseCredito.Transitions.Add(transicaoAnaliseCreditoParaAnaliseCredito);
+            var transicaoanaliseParaanalise = new StateTransition(analise, analise);
+            transicaoanaliseParaanalise.Identifier = 6;
+            transicaoanaliseParaanalise.Name = "De Em Analise para Em Analise";
+            transicaoanaliseParaanalise.Policy = policy;
+            analise.Transitions.Add(transicaoanaliseParaanalise);
 
-            return new List<IStateMachineState> { emNegociacao, aprovado, desistencia, analiseCredito };
+            return new List<IStateMachineState> { emNegociacao, aprovado, desistencia, analise };
         }
 
         internal List<IStateMachineState> ConsultarEstadosSemAlcadaDaMaquinaDeEstado()
@@ -94,12 +94,12 @@ namespace STATEMACHINE.TESTS.Mocks
             var emNegociacao = new StateMachineState("Em Negociação");
             var aprovado = new StateMachineState("Aprovado");
             var desistencia = new StateMachineState("Desistência");
-            var analiseCredito = new StateMachineState("Análise Crédito");
+            var analise = new StateMachineState("Em Análise");
 
-            var transicaoEmNegociacaoParaAnaliseCredito = new StateTransition(emNegociacao, analiseCredito);
-            transicaoEmNegociacaoParaAnaliseCredito.Identifier = 1;
-            transicaoEmNegociacaoParaAnaliseCredito.Name = "De Em Negociação para Analise Credito";
-            emNegociacao.Transitions.Add(transicaoEmNegociacaoParaAnaliseCredito);
+            var transicaoEmNegociacaoParaanalise = new StateTransition(emNegociacao, analise);
+            transicaoEmNegociacaoParaanalise.Identifier = 1;
+            transicaoEmNegociacaoParaanalise.Name = "De Em Negociação para Em Analise";
+            emNegociacao.Transitions.Add(transicaoEmNegociacaoParaanalise);
 
             var transicaoEmNegociacaoParaAprovado = new StateTransition(emNegociacao, aprovado);
             transicaoEmNegociacaoParaAprovado.Identifier = 2;
@@ -121,12 +121,12 @@ namespace STATEMACHINE.TESTS.Mocks
             transicaoAprovadoParaAprovado.Name = "De Aprovado para Aprovado";
             aprovado.Transitions.Add(transicaoAprovadoParaAprovado);
 
-            var transicaoAnaliseCreditoParaAnaliseCredito = new StateTransition(analiseCredito, analiseCredito);
-            transicaoAnaliseCreditoParaAnaliseCredito.Identifier = 6;
-            transicaoAnaliseCreditoParaAnaliseCredito.Name = "De Analise Credito para Analise Credito";
-            analiseCredito.Transitions.Add(transicaoAnaliseCreditoParaAnaliseCredito);
+            var transicaoanaliseParaanalise = new StateTransition(analise, analise);
+            transicaoanaliseParaanalise.Identifier = 6;
+            transicaoanaliseParaanalise.Name = "De Em Analise para Em Analise";
+            analise.Transitions.Add(transicaoanaliseParaanalise);
 
-            return new List<IStateMachineState> { emNegociacao, aprovado, desistencia, analiseCredito };
+            return new List<IStateMachineState> { emNegociacao, aprovado, desistencia, analise };
         }
 
         internal IStateMachine ObterMaquinaDeEstadoSemAlcadaDeTransicao()
@@ -157,15 +157,15 @@ namespace STATEMACHINE.TESTS.Mocks
             var emNegociacao = new StateMachineState("Em Negociação",estadoInvalidoSpecification);
             var aprovado = new StateMachineState("Aprovado",estadoInvalidoSpecification);
             var desistencia = new StateMachineState("Desistência",estadoInvalidoSpecification);
-            var analiseCredito = new StateMachineState("Análise Crédito",estadoInvalidoSpecification);
+            var analise = new StateMachineState("Em Análise",estadoInvalidoSpecification);
 
             var policy = new StateTransitionPolicy(new Cargo());
 
-            var transicaoEmNegociacaoParaAnaliseCredito = new StateTransition(emNegociacao, analiseCredito);
-            transicaoEmNegociacaoParaAnaliseCredito.Identifier = 1;
-            transicaoEmNegociacaoParaAnaliseCredito.Name = "De Em Negociação para Analise Credito";
-            transicaoEmNegociacaoParaAnaliseCredito.Policy = policy;
-            emNegociacao.Transitions.Add(transicaoEmNegociacaoParaAnaliseCredito);
+            var transicaoEmNegociacaoParaanalise = new StateTransition(emNegociacao, analise);
+            transicaoEmNegociacaoParaanalise.Identifier = 1;
+            transicaoEmNegociacaoParaanalise.Name = "De Em Negociação para Em Analise";
+            transicaoEmNegociacaoParaanalise.Policy = policy;
+            emNegociacao.Transitions.Add(transicaoEmNegociacaoParaanalise);
 
             var transicaoEmNegociacaoParaAprovado = new StateTransition(emNegociacao, aprovado);
             transicaoEmNegociacaoParaAprovado.Identifier = 2;
@@ -191,13 +191,13 @@ namespace STATEMACHINE.TESTS.Mocks
             transicaoAprovadoParaAprovado.Policy = policy;
             aprovado.Transitions.Add(transicaoAprovadoParaAprovado);
 
-            var transicaoAnaliseCreditoParaAnaliseCredito = new StateTransition(analiseCredito, analiseCredito);
-            transicaoAnaliseCreditoParaAnaliseCredito.Identifier = 6;
-            transicaoAnaliseCreditoParaAnaliseCredito.Name = "De Analise Credito para Analise Credito";
-            transicaoAnaliseCreditoParaAnaliseCredito.Policy = policy;
-            analiseCredito.Transitions.Add(transicaoAnaliseCreditoParaAnaliseCredito);
+            var transicaoanaliseParaanalise = new StateTransition(analise, analise);
+            transicaoanaliseParaanalise.Identifier = 6;
+            transicaoanaliseParaanalise.Name = "De Em Analise para Em Analise";
+            transicaoanaliseParaanalise.Policy = policy;
+            analise.Transitions.Add(transicaoanaliseParaanalise);
 
-            return new List<IStateMachineState> { emNegociacao, aprovado, desistencia, analiseCredito };
+            return new List<IStateMachineState> { emNegociacao, aprovado, desistencia, analise };
         }
     }
 }

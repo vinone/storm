@@ -1,0 +1,82 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TechTalk.SpecFlow;
+using STATEMACHINE.SKELETON;
+using STATEMACHINE.TESTS.Mocks;
+using Rhino.Mocks;
+using STATEMACHINE.DOMAIN;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace STATEMACHINE.TESTS.Features.StepDefinitions
+{
+    [Binding]
+    public class ControleDeTransiçõesPendentesStep
+    {
+        private IStateMachine _stateMachine;
+        private MockData _mockData = new MockData();
+        private MockRepository _mocks = new MockRepository();
+        private IStateMachineRepository _stateMachineRepository;
+        private ICustomStateMachineControllerContext _stateMachineWithPolicy;
+        private IUsuarioRepositorio _usuarioRepositorio;
+        private Usuario _usuario;
+        private IEnumerable<IStateTransitionPending> _pendencias;
+
+        [Given(@"que uma maquina de estado foi iniciada")]
+        public void DadoQueUmaMaquinaDeEstadoFoiIniciada()
+        {
+            ConfigurarRepositorioDaStateMachine();
+            _stateMachine = _stateMachineRepository.GetStateMachineByIdentifier(1);
+            _stateMachine.Start();
+        }
+
+        [Given(@"que um usuário sem permissão solicitou a transiçao de estado")]
+        public void DadoQueUmUsuarioSemPermissaoSolicitouATransicaoDeEstado()
+        {
+            var transicao = _stateMachine.CurrentState.Transitions.First(x => x.Name == "De Em Negociação para Em Analise");
+
+            ConfigurarRepositorioDoUsuario();
+            _usuario = _usuarioRepositorio.ObterUsuarioPeloCodigo("usuario.nao.aprovador");
+
+            _stateMachineWithPolicy = new TransitionPolicyControllerContext(_stateMachine, transicao, _usuario.Cargo);
+            _stateMachineWithPolicy.Release();
+        }
+
+        [Given(@"que foi criado uma nova pendencia")]
+        public void DadoQueFoiCriadoUmaNovaPendencia()
+        {
+            Assert.IsTrue(_stateMachine.TransitionsPending.Count == 1);
+        }
+
+        [When(@"eu solicitar a maquina de estado as minhas pendencias")]
+        public void QuandoEuSolicitarAMaquinaDeEstadoAsMinhasPendencias()
+        {
+            _pendencias = _stateMachine.TransitionsPending.MyPendencies;
+        }
+
+        [Then(@"a maquina de estado deve retornar 1 pendencia na lista")]
+        public void EntaoAMaquinaDeEstadoDeveRetornar1PendenciaNaLista()
+        {
+            Assert.AreEqual(1, _pendencias.Count());
+        }
+
+        private void ConfigurarRepositorioDaStateMachine()
+        {
+            var maquina = _mockData.ObterMaquinaDeEstado();
+            _stateMachineRepository = _mocks.StrictMock<IStateMachineRepository>();
+            Expect.Call(_stateMachineRepository.GetStateMachineByIdentifier(1))
+                .Return(maquina);
+            _mocks.Replay(_stateMachineRepository);
+        }
+
+        private void ConfigurarRepositorioDoUsuario()
+        {
+            var usuario = _mockData.ObterUsuarioNaoAprovador();
+            _usuarioRepositorio = _mocks.StrictMock<IUsuarioRepositorio>();
+            Expect.Call(_usuarioRepositorio.ObterUsuarioPeloCodigo("usuario.nao.aprovador"))
+                .Return(usuario);
+            _mocks.Replay(_usuarioRepositorio);
+        }
+    }
+}
